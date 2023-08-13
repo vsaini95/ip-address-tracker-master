@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Rubik", sans-serif;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+}
+.header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 25%;
+  padding: 2em 0 4em;
+  background: url(images/pattern-bg-desktop.png) no-repeat;
+  background-size: cover;
+}
+.h_h1 {
+  color: #fff;
+}
+.form {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+.form-input {
+  width: 60%;
+  height: 2.5rem;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  padding: 5px 25px;
+  border: none;
+}
+.form-input::placeholder {
+  color: hsl(0, 0%, 59%);
+  font-weight: 500;
+  font-size: medium;
+}
+.form-btn {
+  background-color: #000;
+  height: 2.5rem;
+}
+#map {
+  height: 61%;
+}
+.details {
+  position: absolute;
+}
