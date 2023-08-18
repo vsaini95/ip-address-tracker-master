@@ -7,16 +7,28 @@ const timezone = document.querySelector(".timez");
 const loc = document.querySelector(".location");
 const ipadd = document.querySelector(".ip");
 
-let map;
 //setting map and tiles
+let map;
+let coords = [51.505, -0.09];
+
 const showMap = function (coords) {
-  map = L.map("map").setView(coords, 10);
+  if (map) {
+    map.off();
+    map.remove();
+  }
+  map = L.map("map").setView(coords, 13);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: "© OpenStreetMap",
   }).addTo(map);
-  const marker = L.marker(coords).addTo(map);
-  marker.bindPopup(`<b>you are in</b>`).openPopup();
+  var myIcon = L.icon({
+    iconUrl: "images/icon-location.svg",
+    iconSize: [38, 50],
+    iconAnchor: [22, 85],
+    popupAnchor: [-3, -76],
+  });
+  const marker = L.marker(coords, { icon: myIcon }).addTo(map);
+  marker.bindPopup(`you are in entered location`).openPopup();
 
   var popup = L.popup();
   map.on("click", function onMapClick(e) {
@@ -25,45 +37,40 @@ const showMap = function (coords) {
       .setContent("You clicked the map at " + e.latlng.toString())
       .openOn(map);
   });
+  inputip.value = "";
 };
-
-navigator.geolocation.getCurrentPosition(
-  function (pos) {
-    const { longitude } = pos.coords;
-    const { latitude } = pos.coords;
-    const coords = [latitude, longitude];
-    showMap(coords);
-  },
-  function () {
-    alert("could not access your location");
-  }
-);
+showMap(coords);
 
 const ipHandler = function (ip) {
-  fetch(
-    `https://geo.ipify.org/api/v2/country,city?apiKey=at_MhI9eO2ZfK6xSWGY7ozkt0qY4sPSk&ipAddress=${ip}`
-  )
-    .then((res) => {
-      if (!res.ok) {
-        alert("Please enter the correct IP deatils!");
-        return;
-      }
-      return res.json();
-    })
-    .then((data) => {
-      //console.log(data);
-      ipadd.textContent = `${data.ip}`;
-      timezone.textContent = `${data.location.timezone}`;
-      loc.textContent = `${data.location.country}, ${data.location.region}`;
-      isp.textContent = `${data.isp}`;
-      showMap([data.location.lat, data.location.lng]);
-    })
-    .catch((err) => alert(err));
-  inputip.value = "";
+  if (ip) {
+    fetch(
+      `https://geo.ipify.org/api/v2/country,city?apiKey=at_MhI9eO2ZfK6xSWGY7ozkt0qY4sPSk&ipAddress=${ip}`
+    )
+      .then((res) => {
+        if (!res.ok) {
+          alert("Please enter the correct IP deatils!");
+          return;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        ipadd.textContent = `${data.ip}`;
+        timezone.textContent = `${data.location.timezone}`;
+        loc.textContent = `${data.location.country}, ${data.location.region}`;
+        isp.textContent = `${data.isp}`;
+        showMap([data.location.lat, data.location.lng]);
+      })
+      .catch((err) => alert(err));
+  }
 };
 
 btn.addEventListener("click", function (e) {
   e.preventDefault();
   let ip = inputip.value;
   ipHandler(ip);
+});
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") ipHandler(inputip.value);
 });
