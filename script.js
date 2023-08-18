@@ -51,7 +51,7 @@ const ipHandler = function (ip) {
       return res.json();
     })
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       ipadd.textContent = `${data.ip}`;
       timezone.textContent = `${data.location.timezone}`;
       loc.textContent = `${data.location.country}, ${data.location.region}`;
