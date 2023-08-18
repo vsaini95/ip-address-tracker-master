@@ -1,4 +1,43 @@
-const detailsdiv = document.querySelector(".details");
+"use strict";
+
+const btn = document.querySelector(".form_btn");
+const inputip = document.querySelector(".form-input");
+const isp = document.querySelector(".isp");
+const timezone = document.querySelector(".timez");
+const loc = document.querySelector(".location");
+const ipadd = document.querySelector(".ip");
+
+let map;
+//setting map and tiles
+const showMap = function (coords) {
+  map = L.map("map").setView(coords, 10);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: "© OpenStreetMap",
+  }).addTo(map);
+  const marker = L.marker(coords).addTo(map);
+  marker.bindPopup(`<b>you are in</b>`).openPopup();
+
+  var popup = L.popup();
+  map.on("click", function onMapClick(e) {
+    popup
+      .setLatLng(e.latlng)
+      .setContent("You clicked the map at " + e.latlng.toString())
+      .openOn(map);
+  });
+};
+
+navigator.geolocation.getCurrentPosition(
+  function (pos) {
+    const { longitude } = pos.coords;
+    const { latitude } = pos.coords;
+    const coords = [latitude, longitude];
+    showMap(coords);
+  },
+  function () {
+    alert("could not access your location");
+  }
+);
 
 const ipHandler = function (ip) {
   fetch(
@@ -13,60 +52,18 @@ const ipHandler = function (ip) {
     })
     .then((data) => {
       console.log(data);
-      mapd(
-        data.location.lat,
-        data.location.lng,
-        data.location.country,
-        data.location.city
-      );
-      detailsdiv.innerHTML = `<div class="ip">
-      <p class="details-p">IP ADDRESS</p>
-      <h1>${data.ip}</h1>
-    </div>
-    <div class="location">
-      <p class="details-p">LOCATION</p>
-      <h1>${data.location.country}, ${data.location.region}</h1>
-    </div>
-    <div class="timez">
-      <p class="details-p">TIMEZONE</p>
-      <h1>UTC ${data.location.timezone}</h1>
-    </div>
-    <div class="isp">
-      <p class="details-p">ISP</p>
-      <h1>${data.isp}</h1>
-    </div>`;
+      ipadd.textContent = `${data.ip}`;
+      timezone.textContent = `${data.location.timezone}`;
+      loc.textContent = `${data.location.country}, ${data.location.region}`;
+      isp.textContent = `${data.isp}`;
+      showMap([data.location.lat, data.location.lng]);
     })
-    .catch((err) => console.error(err));
+    .catch((err) => alert(err));
   inputip.value = "";
 };
 
-const btn = document.querySelector(".form_btn");
-const inputip = document.querySelector(".form-input");
 btn.addEventListener("click", function (e) {
   e.preventDefault();
   let ip = inputip.value;
   ipHandler(ip);
 });
-
-var map;
-const mp = document.getElementById("map");
-var popup;
-var mapd = function (lat, lon, count, cit) {
-  map = L.map("map").setView([lat, lon], 13);
-  console.log(map);
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: "© OpenStreetMap",
-  }).addTo(map);
-  var marker = L.marker([lat, lon]).addTo(map);
-  marker.bindPopup(`<b>you are in</b><br>${cit}, ${count}`).openPopup();
-  popup = L.popup();
-};
-function onMapClick(e) {
-  console.log(e);
-  popup
-    .setLatLng(e.latlng)
-    .setContent("You clicked the map at " + e.latlng.toString())
-    .openOn(map);
-}
-mp.addEventListener("click", onMapClick);
