@@ -1,4 +1,4 @@
-### IP address tracker solution
+### IP address tracker
 
 This is my solution to IP address Tracker challenge by Frontendmentor.io. which accept IP from input, do a http request and update information displayed on app. 
 
@@ -11,13 +11,7 @@ This is my solution to IP address Tracker challenge by Frontendmentor.io. which 
 - Get map to display on page load using latitude and longitude of location
 - Update map marker using coordinates receive from api response.
 
-
-### Screenshot
-
-![](./active-states.jpg)
-
-
-### Links
+### Live Link
 
 - Live Site URL: (https://vsaini95.github.io/ip-address-tracker-master/)
 
@@ -27,3 +21,7 @@ This is my solution to IP address Tracker challenge by Frontendmentor.io. which 
 - Semantic HTML5 markup
 - CSS custom properties
 - Vanilla Javascript
+
+### Screenshot
+
+(.design/active-states.jpg)
