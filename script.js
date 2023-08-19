@@ -65,7 +65,6 @@ const ipHandler = function (ip) {
       .catch((err) => {
         throw new Error(err);
       });
-      .catch((err) => alert(err));
   }
 };
 
@@ -78,3 +77,4 @@ btn.addEventListener("click", function (e) {
 document.addEventListener("keydown", function (e) {
   if (e.key === "Enter") ipHandler(inputip.value);
 });
+;
