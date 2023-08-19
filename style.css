@@ -47,6 +47,7 @@ body {
   background-color: #000;
   height: 3.3rem;
   width: 50px;
+  padding: 13px 0;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
 }
