@@ -5,48 +5,120 @@
   font-family: "Rubik", sans-serif;
 }
 body {
-  width: 100vw;
+  box-sizing: border-box;
   height: 100vh;
+  overflow: hidden;
 }
 .header {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   height: 25%;
   padding: 2em 0 4em;
   background: url(images/pattern-bg-desktop.png) no-repeat;
   background-size: cover;
+  position: relative;
+  text-align: center;
 }
 .h_h1 {
   color: #fff;
+  font-size: 2rem;
 }
 .form {
   display: flex;
-  margin-top: 30px;
+  margin-top: 20px;
   align-items: center;
   justify-content: center;
-  width: 50%;
 }
 .form-input {
-  width: 60%;
+  width: 30%;
   height: 2.5rem;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   padding: 5px 25px;
   border: none;
 }
+.form-input:focus,
+:active {
+  border: none;
+  outline: none;
+}
 .form-input::placeholder {
   color: hsl(0, 0%, 59%);
-  font-weight: 500;
-  font-size: medium;
 }
-.form-btn {
+.form_btn {
   background-color: #000;
-  height: 2.5rem;
+  height: 3.3rem;
+  width: 50px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 #map {
-  height: 61%;
+  height: 62%;
+  z-index: 0;
 }
 .details {
   position: absolute;
+  top: 25%;
+  display: flex;
+  margin: 0 18%;
+  width: 64%;
+  height: 170px;
+  z-index: 1;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 1px 0px 2px 1px #404040;
+}
+.details div {
+  width: 25%;
+  min-width: 70px;
+  border-right: 1px solid hsl(0, 3%, 86%);
+  padding: 0 30px;
+  margin: 35px 0;
+  background-color: #fff;
+  flex-shrink: 1;
+}
+.details div:nth-child(4n) {
+  border-right: 0;
+}
+.details-p {
+  color: hsl(0, 1%, 66%);
+  font-weight: 500;
+  font-size: 0.75em;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+@media screen and (max-width: 769px) {
+  .h_h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  .form-input {
+    width: 58%;
+  }
+  .details {
+    flex-direction: column;
+    width: 80%;
+    margin: 0% 8%;
+  }
+  .details h1 {
+    font-size: 1.2rem;
+  }
+  .details div {
+    width: 100%;
+    padding: 10px 10px;
+    margin: 0;
+    border-right: 0;
+    text-align: center;
+  }
+  .details div:nth-child(1) {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  .details div:nth-child(4n) {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+}
+@media screen and (max-width: 376px) {
+  .header {
+    background: url(images/pattern-bg-mobile.png) no-repeat;
+  }
 }
