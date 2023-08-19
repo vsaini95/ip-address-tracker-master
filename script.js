@@ -48,10 +48,7 @@ const ipHandler = function (ip) {
     )
       .then((res) => {
         if (!res.ok) {
-<<<<<<< HEAD
           inputip.value = "";
-=======
->>>>>>> 8c11dba64545536d472345f298d4c504dddf7044
           alert("Please enter the correct IP deatils!");
           return;
         }
@@ -65,13 +62,9 @@ const ipHandler = function (ip) {
         isp.textContent = `${data.isp}`;
         showMap([data.location.lat, data.location.lng]);
       })
-<<<<<<< HEAD
       .catch((err) => {
         throw new Error(err);
       });
-=======
-      .catch((err) => alert(err));
->>>>>>> 8c11dba64545536d472345f298d4c504dddf7044
   }
 };
 
