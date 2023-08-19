@@ -17,11 +17,11 @@ This is my solution to IP address Tracker challenge by Frontendmentor.io. which 
 
 
 ### Built with
-
 - Semantic HTML5 markup
 - CSS custom properties
 - Vanilla Javascript
 
 ### Screenshot
 
-(.design/active-states.jpg)
+![Screenshot](https://github.com/vsaini95/ip-address-tracker-master/assets/90824528/46f02b9c-0486-4e3f-976e-86a5d9d71247)
+
